@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
+
 // PrimeNG
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -19,7 +20,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     InputTextModule,
     ButtonModule,
     PasswordModule,
-    CheckboxModule
+    CheckboxModule,
   ]
 })
 export class LoginComponent implements OnInit {
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {

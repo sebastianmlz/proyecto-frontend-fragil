@@ -1,1 +1,33 @@
-<p>home works!</p>
+<!-- NAVBAR -->
+<nav class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500 to-yellow-400 text-white shadow-md">
+  <div class="text-2xl font-bold">altoke</div>
+  <ul class="flex space-x-6 font-medium">
+    <li><a href="#" class="hover:underline">Inicio</a></li>
+    <li><a href="#" class="hover:underline">Cuentas</a></li>
+    <li><a href="#" class="hover:underline">Transferencias</a></li>
+    <li><a href="#" class="hover:underline">Perfil</a></li>
+  </ul>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="p-6 bg-white min-h-screen">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Tus transacciones</h2>
+
+  <!-- TABLA PrimeNG -->
+  <p-table [value]="users" class="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>id</th>
+        <th>cliente</th>
+        <th>email</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.full_name }}</td>
+        <td class="text-green-600 font-semibold">{{ user.email }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
