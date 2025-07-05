@@ -1,0 +1,36 @@
+<nav
+  class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500 to-yellow-400 text-white shadow-md">
+  <div class="text-2xl font-bold">altoke</div>
+  <ul class="flex space-x-6 font-medium">
+    <li><a routerLink="/home" class="hover:underline cursor-pointer">Inicio</a></li>
+    <li><a routerLink="/transaction" class="hover:underline">Transferencias</a></li>
+    <li><a routerLink="/profile" class="hover:underline cursor-pointer">Perfil</a></li>
+  </ul>
+</nav>
+
+<!-- FORMULARIO DE TRANSFERENCIA -->
+<div class="flex flex-col items-center justify-center min-h-[80vh] bg-white">
+  <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-8">
+    <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Realizar Transferencia</h2>
+    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="mb-4">
+        <label for="origin" class="block text-gray-700 text-sm font-bold mb-2">ID Origen</label>
+        <input pInputText id="origin" formControlName="origin" type="number" class="w-full p-inputtext" placeholder="Tu ID de usuario">
+      </div>
+      <div class="mb-4">
+        <label for="target" class="block text-gray-700 text-sm font-bold mb-2">ID Destino</label>
+        <input pInputText id="target" formControlName="target" type="number" class="w-full p-inputtext" placeholder="ID del destinatario">
+      </div>
+      <div class="mb-6">
+        <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Monto</label>
+        <input pInputText id="amount" formControlName="amount" type="number" class="w-full p-inputtext" placeholder="Monto a transferir">
+      </div>
+      <button pButton type="submit" label="Transferir" class="w-full p-button-rounded shadow-md" [style]="{'background': 'linear-gradient(to right, #ff8c00, #ff4500)'}"></button>
+    </form>
+    <div *ngIf="transferStatus" class="mt-6 text-center">
+      <span class="text-green-600 font-semibold" *ngIf="transferStatus === 'success'">¡Transferencia realizada con éxito!</span>
+      <span class="text-red-600 font-semibold" *ngIf="transferStatus === 'error'">Error al realizar la transferencia.</span>
+    </div>
+  </div>
+</div>
+

@@ -10,7 +10,16 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(){
+  getUsers() {
     return this.http.get(`${this.apiUrl}api/v1/customers/`);
+  }
+
+  DoingTransaction(origin: number, target: number, amount: number) {
+    const body = {
+      origin: origin,
+      target: target,
+      amount: amount
+    };
+    return this.http.post(`${this.apiUrl}api/v1/transfers/`, body);
   }
 }
