@@ -1,0 +1,137 @@
+<div class="login-container min-h-screen flex flex-col md:flex-row">
+  <!-- Lado izquierdo - Formulario de login -->
+  <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
+    <div class="w-full max-w-md">
+      <!-- Logo con texto estilizado en lugar de imagen -->
+      <div class="mb-8 text-center">
+        <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-red-500">
+          altoke
+        </h1>
+        <p class="text-gray-500 text-sm">Tu plataforma de Confianza</p>
+      </div>
+
+      <!-- Formulario -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+        <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Iniciar sesión</h2>
+        
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+              <i class="pi pi-user text-gray-400"></i>
+            </span>
+            <input 
+              pInputText 
+              id="email" 
+              formControlName="email" 
+              class="w-full pl-10 p-inputtext"
+              placeholder="Ingresa tu email"
+            >
+          </div>
+          <small *ngIf="submitted && f['email'].errors" class="p-error block mt-1">
+            Email es requerido
+          </small>
+        </div>
+        
+        <div class="mb-6">
+          <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+              <i class="pi pi-lock text-gray-400"></i>
+            </span>
+            <p-password 
+              id="password" 
+              formControlName="password"
+              [feedback]="false"
+              [toggleMask]="true"
+              styleClass="w-full"
+              inputStyleClass="pl-10"
+              placeholder="Ingresa tu contraseña"
+            ></p-password>
+          </div>
+          <small *ngIf="submitted && f['password'].errors" class="p-error block mt-1">
+            Contraseña es requerida
+          </small>
+        </div>
+        
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center">
+            <p-checkbox formControlName="remember" [binary]="true" inputId="remember"></p-checkbox>
+            <label for="remember" class="ml-2 text-sm text-gray-700">Recordarme</label>
+          </div>
+          <a href="#" class="text-sm text-cyan-500 hover:text-cyan-600">¿Olvidaste tu contraseña?</a>
+        </div>
+        
+        <!-- Botón con vulnerabilidad: sin validación CSRF -->
+        <button 
+          pButton 
+          type="submit" 
+          label="Ingresar" 
+          class="w-full p-button-rounded shadow-md"
+          [ngClass]="{'p-button-loading': loading}"
+          [style]="{'background': 'linear-gradient(to right, #ff8c00, #ff4500)'}"
+        ></button>
+      </form>
+      
+      <div class="mt-4 text-center text-sm text-gray-600">
+        ¿No tienes cuenta? <a href="#" class="text-cyan-500 hover:text-cyan-600 font-medium">Regístrate aquí</a>
+      </div>
+      
+      <!-- Enlaces de descarga con íconos mejorados -->
+      <div class="mt-8">
+        <p class="text-center text-gray-700 font-medium mb-4">Descarga altoke en:</p>
+        <div class="flex justify-center space-x-4">
+          <a href="#" class="border rounded-lg px-4 py-2 flex items-center hover:bg-gray-100 transition-colors duration-300">
+            <i class="pi pi-android text-lg mr-2 text-green-600"></i> Google Play
+          </a>
+          <a href="#" class="border rounded-lg px-4 py-2 flex items-center hover:bg-gray-100 transition-colors duration-300">
+            <i class="pi pi-apple text-lg mr-2"></i> App Store
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Lado derecho - Banner con diseño sin imagen -->
+  <div class="hidden md:block md:w-1/2 bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500 relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+    <div class="w-full h-full flex flex-col justify-center items-center p-12 text-white relative">
+      <div class="text-center max-w-md">
+        <div class="mb-6 flex justify-center">
+          <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg">
+            <i class="pi pi-bolt text-5xl text-orange-500"></i>
+          </div>
+        </div>
+        <h1 class="text-5xl font-bold mb-6">¡Compra Y Paga Por QR!</h1>
+        <p class="text-xl mb-8">Compra tu paquete <strong>Entel</strong> en <strong>altoke</strong> y sigue chateando sin cortes</p>
+        
+        <div class="flex justify-center gap-4 mt-10">
+          <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+            <i class="pi pi-wifi text-3xl"></i>
+            <p class="mt-2 font-medium">Internet</p>
+          </div>
+          <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+            <i class="pi pi-mobile text-3xl"></i>
+            <p class="mt-2 font-medium">Recargas</p>
+          </div>
+          <div class="bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+            <i class="pi pi-comments text-3xl"></i>
+            <p class="mt-2 font-medium">SMS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CSS adicional para el componente -->
+<style>
+  .bg-pattern {
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 4px);
+  }
+  
+  /* Asegura que el input dentro de p-password tenga el padding correcto */
+  :host ::ng-deep .p-password input {
+    padding-left: 2.5rem !important;
+  }
+</style>
