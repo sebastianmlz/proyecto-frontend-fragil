@@ -12,10 +12,18 @@
 <div class="flex flex-col items-center justify-center min-h-[80vh] bg-white">
   <div class="w-full max-w-lg bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-8">
     <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Realizar Transferencia</h2>
+    
+    <!-- Información del usuario logueado -->
+    <div class="mb-6 p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border border-orange-200" *ngIf="usuarioLogueado">
+      <p class="text-sm text-gray-600 mb-1">Transferir desde:</p>
+      <p class="font-semibold text-orange-600">{{ usuarioLogueado.email }}</p>
+    </div>
+    
     <form [formGroup]="transferForm" (ngSubmit)="onSubmit()" autocomplete="off">
       <div class="mb-4">
-        <label for="origin" class="block text-gray-700 text-sm font-bold mb-2">ID Origen</label>
-        <input pInputText id="origin" formControlName="origin" type="number" class="w-full p-inputtext" placeholder="Tu ID de usuario">
+        <label for="origin" class="block text-gray-700 text-sm font-bold mb-2">ID Origen (Tu cuenta)</label>
+        <input pInputText id="origin" formControlName="origin" type="number" class="w-full p-inputtext bg-gray-100" placeholder="Tu ID de usuario" readonly>
+        <small class="text-gray-500 text-xs">Este campo se completa automáticamente con tu información</small>
       </div>
       <div class="mb-4">
         <label for="target" class="block text-gray-700 text-sm font-bold mb-2">ID Destino</label>
@@ -31,6 +39,41 @@
       <span class="text-green-600 font-semibold" *ngIf="transferStatus === 'success'">¡Transferencia realizada con éxito!</span>
       <span class="text-red-600 font-semibold" *ngIf="transferStatus === 'error'">Error al realizar la transferencia.</span>
     </div>
+  </div>
+
+  <!-- TABLA DE TRANSACCIONES -->
+  <div class="w-full max-w-6xl bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-8">
+    <h3 class="text-2xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">Historial de Transacciones</h3>
+    
+    <p-table [value]="transactions" class="p-datatable-sm" [paginator]="true" [rows]="10" [showCurrentPageReport]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Usuario Origen</th>
+          <th>ID Origen</th>
+          <th>Usuario Destino</th>
+          <th>ID Destino</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transaction>
+        <tr>
+          <td>{{ transaction.id }}</td>
+          <td>{{ transaction.origin_user }}</td>
+          <td>{{ transaction.origin }}</td>
+          <td>{{ transaction.target_user }}</td>
+          <td>{{ transaction.target }}</td>
+          <td class="text-green-600 font-semibold">${{ transaction.amount }}</td>
+          <td>{{ transaction.created_at | date:'short' }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptyMessage">
+        <tr>
+          <td colspan="8" class="text-center text-gray-500 py-4">No hay transacciones registradas</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>
 

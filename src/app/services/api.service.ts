@@ -14,6 +14,11 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}api/v1/customers/`);
   }
 
+  getTransactions() {
+    // Endpoint para obtener todas las transacciones con información de usuarios
+    return this.http.get(`${this.apiUrl}api/v1/transfers/`);
+  }
+
   DoingTransaction(origin: number, target: number, amount: number) {
     const body = {
       origin: origin,
