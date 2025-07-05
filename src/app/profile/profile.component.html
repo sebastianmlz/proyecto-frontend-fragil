@@ -1,11 +1,13 @@
 <!-- NAVBAR -->
-<nav class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500 to-yellow-400 text-white shadow-md">
+<nav
+  class="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-orange-500 to-yellow-400 text-white shadow-md">
   <div class="text-2xl font-bold">altoke</div>
   <ul class="flex space-x-6 font-medium">
     <li><a routerLink="/home" class="hover:underline cursor-pointer">Inicio</a></li>
     <li><a href="#" class="hover:underline">Cuentas</a></li>
     <li><a href="#" class="hover:underline">Transferencias</a></li>
-    <li><a routerLink="/profile" class="hover:underline cursor-pointer bg-white bg-opacity-20 px-3 py-1 rounded">Perfil</a></li>
+    <li><a routerLink="/profile"
+        class="hover:underline cursor-pointer bg-white bg-opacity-20 px-3 py-1 rounded">Perfil</a></li>
   </ul>
 </nav>
 
@@ -27,6 +29,25 @@
         <td>{{ user.id }}</td>
         <td>{{ user.full_name }}</td>
         <td>{{ user.email }}</td>
+        <td class="text-red-600 font-mono">{{ user.password }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <!--Perfil del usuario logueado-->
+  <h1 class="text-2xl font-bold text-gray-800 mb-4">Usuario Logueado</h1>
+  <p-table [value]="usuarioLogueado" class="p-datatable-sm mb-8">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>id</th>
+        <th>email</th>
+        <th>contraseña</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.id }}</td>
+        <td class="text-green-600 font-semibold">{{ user.email }}</td>
         <td class="text-red-600 font-mono">{{ user.password }}</td>
       </tr>
     </ng-template>

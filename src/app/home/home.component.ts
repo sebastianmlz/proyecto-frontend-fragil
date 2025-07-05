@@ -13,15 +13,17 @@ import { ApiService } from '../services/api.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  users: any[] = [];
+  usuarioLogueado: any[] = [];
+
   constructor(
     private apiService: ApiService
   ) { }
-  users: any[] = [];
 
   ngOnInit() {
+    this.usuarioLogueado = this.getUsuarioLogueado();
     this.getCustomers();
   }
-
 
   getCustomers() {
     try {
@@ -32,5 +34,19 @@ export class HomeComponent {
     } catch (error) {
       console.error('Error fetching users:', error);
     }
+  }
+
+  getUsuarioLogueado() {
+    const userString = localStorage.getItem('user_credentials');
+    if (userString) {
+      const user = JSON.parse(userString);
+      // Cambia esto si tienes un nombre real
+      return [{
+        id: 1,
+        full_name: user.email,
+        email: user.email
+      }];
+    }
+    return [];
   }
 }

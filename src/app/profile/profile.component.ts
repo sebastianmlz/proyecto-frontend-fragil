@@ -13,10 +13,12 @@ import { RouterLink } from '@angular/router';
 })
 export class ProfileComponent {
   users: any[] = [];
+  usuarioLogueado: any[] = [];
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
+    this.usuarioLogueado = this.getUsuarioLogueado();
     this.getUsers();
   }
 
@@ -30,4 +32,19 @@ export class ProfileComponent {
       console.error('Error obteniendo usuarios:', error);
     }
   }
+
+   getUsuarioLogueado() {
+    const userString = localStorage.getItem('user_credentials');
+    if (userString) {
+      const user = JSON.parse(userString);
+      // Cambia esto si tienes un nombre real
+      return [{
+        id: 1,
+        email: user.email,
+        password: user.password
+      }];
+    }
+    return [];
+  }
+
 }
